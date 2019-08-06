@@ -1,23 +1,21 @@
 <template>
-    <lightning-card title="Twilio messages" icon-name="standard:call">
-        <div class="slds-p-horizontal_small" if:false={isError}>
-            sobjecttype = {currentSObjectName}
-            phoneNumber = {phoneNumber}
-        </div>
+    <lightning-card class="container" title="Twilio messages" icon-name="standard:call">
+            
         <div class="slds-p-horizontal_small" if:true={isError}>
             {errorMsg}
         </div>
 
-        <lightning:layout class="slds-p-horizontal_small slds-p-vertical_small">
-        
-        <template for:each={twilioMessages} for:item="twilioMessage">
-            <lightning:layoutItem key={twilioMessage.sid}>
-                    <p>{twilioMessage.body}</p>
-            </lightning:layoutItem>            
-        </template>
-
-        </lightning:layout>
-        
+        <div class="slds-scrollable slds-m-bottom_large">
+            <lightning:layout class="slds-p-horizontal_small slds-p-vertical_small" if:false={errorMsg}>
+                <template for:each={twilioMessages} for:item="twilioMessage">
+                    <div class="lgc-bg" key={twilioMessage.sid}>
+                        <lightning-tile label={twilioMessage.date_sent} type="media" class="slds-text-longform">
+                            <lightning-avatar slot="media" src="https://www.twilio.com/marketing/bundles/company/img/logos/blue/twilio-mark-blue.png"></lightning-avatar>
+                                <p>{twilioMessage.body}</p>
+                        </lightning-tile>
+                    </div>
+                </template>
+            </lightning:layout>
+        </div>
     </lightning-card>
-    
 </template>

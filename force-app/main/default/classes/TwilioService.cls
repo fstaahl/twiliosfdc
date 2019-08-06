@@ -37,10 +37,4 @@ public class TwilioService {
         return filterString;
     }
 
-    private class TwilioMessage {
-        public String body;
-        public Date date_sent;
-        public String status;
-    }
-
 }

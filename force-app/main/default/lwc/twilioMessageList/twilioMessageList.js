@@ -10,6 +10,7 @@ export default class TwilioMessageList extends LightningElement {
     @track contactTitle
     @track errorMsg
     @track twilioMessages = [];
+    @track hasLoaded;
 
     @wire (getRecord, {recordId: '$recordId'})
     record;
@@ -24,13 +25,20 @@ export default class TwilioMessageList extends LightningElement {
             'filters' : null
         }).then(result => {
             this.getTwilioMessagesFromJson(result);
+            this.hasLoaded = true;
         })).catch(error => {
             this.errorMsg = error.message;
+            this.hasLoaded = true;
         })
     }
 
     get isError() {
         return this.errorMsg ? true : false;
+    }
+
+    get showMessageList() {
+        return !this.errorMsg && this.hasLoaded;
+
     }
 
     getTwilioMessagesFromJson(result) {
