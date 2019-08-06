@@ -1,0 +1,23 @@
+<template>
+    <lightning-card title="Twilio messages" icon-name="standard:call">
+        <div class="slds-p-horizontal_small" if:false={isError}>
+            sobjecttype = {currentSObjectName}
+            phoneNumber = {phoneNumber}
+        </div>
+        <div class="slds-p-horizontal_small" if:true={isError}>
+            {errorMsg}
+        </div>
+
+        <lightning:layout class="slds-p-horizontal_small slds-p-vertical_small">
+        
+        <template for:each={twilioMessages} for:item="twilioMessage">
+            <lightning:layoutItem key={twilioMessage.sid}>
+                    <p>{twilioMessage.body}</p>
+            </lightning:layoutItem>            
+        </template>
+
+        </lightning:layout>
+        
+    </lightning-card>
+    
+</template>
